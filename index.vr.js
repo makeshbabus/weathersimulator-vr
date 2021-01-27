@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Pano, AppRegistry, asset, VrAnimated } from 'react-vr';
 
+import WeatherCard from './vr/components/WeatherCard';
+
 const api_key = "d6b214d96073dceff7b10962989323fd";
 
 class WeatherSimulator extends Component {
@@ -8,9 +10,22 @@ class WeatherSimulator extends Component {
     super();
 
     this.state = {
-      weatherObject: {}
+      weatherObject: {
+        name: '',
+        main: {
+          temp: 0
+        },
+        weather: [
+          { description: '' }
+        ],
+        wind: {
+          deg: 1,
+          speed: 1,
+        }
+      }
     }
   }
+
   componentDidMount() {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=London&appid=${api_key}`, {
       method: 'GET'
@@ -20,8 +35,13 @@ class WeatherSimulator extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
         <Pano source={asset('lombard-vr.jpg')}></Pano>
+        <WeatherCard weatherObject={this.state.weatherObject} />
       </View>
     )
   }
