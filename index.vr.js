@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Pano, AppRegistry, asset, VrAnimated } from 'react-vr';
 
 import WeatherCard from './vr/components/WeatherCard';
+import WindCloudObject from './vr/components/WindCloudObject';
 
 const api_key = "d6b214d96073dceff7b10962989323fd";
 
@@ -42,6 +43,7 @@ class WeatherSimulator extends Component {
       }}>
         <Pano source={asset('lombard-vr.jpg')}></Pano>
         <WeatherCard weatherObject={this.state.weatherObject} />
+        <WindCloudObject wind={this.state.weatherObject.wind}/>
       </View>
     )
   }
